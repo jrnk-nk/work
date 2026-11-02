@@ -1,0 +1,198 @@
+/*
+ * Theme tokens. The ground comes from the palette (lib/settings.js stamps
+ * data-light-palette / data-dark-palette on <html>); accent, fonts, radius,
+ * text size and chat width are CSS variables set from the same file.
+ */
+:root {
+  --accent: #6d28d9;
+  --accent-foreground: #ffffff;
+  --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+  --radius: 14px;
+  --chat-font-size: 15px;
+  --chat-width: 780px;
+  --font-sans: Inter, ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  /* Derived, so every palette gets them for free. */
+  --ink: var(--foreground);
+  --ink-foreground: var(--card);
+  --panel: color-mix(in srgb, var(--foreground) 3.5%, var(--background));
+  --border-strong: color-mix(in srgb, var(--foreground) 22%, var(--border));
+}
+
+/* Light grounds. Paper is the default. */
+:root,
+[data-theme="light"] {
+  --background: #f4f1ec;
+  --foreground: #1b1916;
+  --card: #fbfaf7;
+  --muted: #ece8e1;
+  --muted-foreground: #716b63;
+  --secondary: #e6e1d8;
+  --border: #e0dbd2;
+  --success: #2c8556;
+  --destructive: #c23f35;
+  color-scheme: light;
+}
+
+[data-theme="light"][data-light-palette="snow"] {
+  --background: #f7f8fa;
+  --foreground: #1d2024;
+  --card: #ffffff;
+  --muted: #eef0f3;
+  --muted-foreground: #687078;
+  --secondary: #e5e8ec;
+  --border: #e2e5ea;
+}
+
+[data-theme="light"][data-light-palette="sepia"] {
+  --background: #f3ead9;
+  --foreground: #3b3229;
+  --card: #f9f3e7;
+  --muted: #ebe0cb;
+  --muted-foreground: #76674f;
+  --secondary: #e3d6bd;
+  --border: #e0d3ba;
+}
+
+[data-theme="light"][data-light-palette="mist"] {
+  --background: #eceef1;
+  --foreground: #2f3336;
+  --card: #ffffff;
+  --muted: #e4e7ea;
+  --muted-foreground: #686e74;
+  --secondary: #dadde1;
+  --border: #dde0e4;
+}
+
+[data-theme="light"][data-light-palette="sage"] {
+  --background: #eef2ec;
+  --foreground: #2f352d;
+  --card: #f8faf6;
+  --muted: #e3e8e0;
+  --muted-foreground: #667062;
+  --secondary: #d9dfd5;
+  --border: #dbe1d7;
+}
+
+/* Dark grounds. Graphite is the default. */
+[data-theme="dark"] {
+  --background: #161513;
+  --foreground: #f1ede6;
+  --card: #1e1c1a;
+  --muted: #2a2724;
+  --muted-foreground: #a39d94;
+  --secondary: #33302c;
+  --border: #34302b;
+  --success: #5fc28b;
+  --destructive: #ef6b5f;
+  color-scheme: dark;
+}
+
+[data-theme="dark"][data-dark-palette="midnight"] {
+  --background: #10131a;
+  --foreground: #e4e8f0;
+  --card: #181c25;
+  --muted: #222734;
+  --muted-foreground: #9aa3b5;
+  --secondary: #2a3040;
+  --border: #282e3c;
+}
+
+[data-theme="dark"][data-dark-palette="ink"] {
+  --background: #0a0a0a;
+  --foreground: #e6e6e6;
+  --card: #141414;
+  --muted: #1f1f1f;
+  --muted-foreground: #9a9a9a;
+  --secondary: #282828;
+  --border: #262626;
+}
+
+[data-theme="dark"][data-dark-palette="ocean"] {
+  --background: #0d181d;
+  --foreground: #dbe9ee;
+  --card: #152227;
+  --muted: #1f2e34;
+  --muted-foreground: #92a9b1;
+  --secondary: #26373e;
+  --border: #24343a;
+}
+
+[data-theme="dark"][data-dark-palette="plum"] {
+  --background: #15111b;
+  --foreground: #e7e1ee;
+  --card: #1e1925;
+  --muted: #2a2332;
+  --muted-foreground: #a69cb3;
+  --secondary: #332b3d;
+  --border: #30283a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* No scrollbar chrome anywhere; wheel, touch and keyboard still scroll. */
+* {
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* The OS setting, or the one in Settings > Appearance. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+[data-reduce-motion="true"] *,
+[data-reduce-motion="true"] *::before,
+[data-reduce-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
